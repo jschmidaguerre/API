@@ -8,23 +8,28 @@ const Card = ({ nombre, categoria, duracion, costo, descripcion, estrellas, imag
         for (let i = 0; i < estrellas; i++) {
             stars.push(<span key={i} className="text-yellow-500">★</span>);
         }
-        return stars;
+        return <div className="flex justify-center mb-2">{stars}</div>;
     };
 
     return (
-        <div className="bg-gray-100 rounded p-4 m-4">
-            <img src={imagen} alt={nombre} className="rounded-t" />
-            <div className="text-center my-2">
-                <div className="text-yellow-500 text-lg">{renderStars()}</div>
-                <h2 className="text-xl font-bold">{nombre}</h2>
-                <Button text="Contratar" />
+        <div className="bg-gray-100 rounded-xl p-4 shadow-md w-64">
+            <div className="flex justify-center">
+                <img src={imagen} alt={nombre} className="w-24 h-24 object-cover rounded-full" />
             </div>
-            <div>
-                <p><strong>Categoria:</strong> {categoria}</p>
-                <p><strong>Duración:</strong> {duracion}</p>
-                <p><strong>Costo:</strong> ${costo}</p>
-                <p><strong>Descripción:</strong> {descripcion}</p>
+            <div className="text-center my-4">
+                {renderStars()}
+                <h2 className="text-md font-semibold mb-2">{nombre}</h2>
+                <div class="mt-5 mb-5">
+
+                    <Button text="Contratar" />
+                </div>
             </div>
+            <ul className="text-xs my-2">
+                <li><strong>Categoría:</strong> {categoria}</li>
+                <li><strong>Duración:</strong> {duracion}</li>
+                <li><strong>Costo:</strong> ${costo}</li>
+                <li className="truncate"><strong>Descripción:</strong> {descripcion}</li>
+            </ul>
         </div>
     );
 };
