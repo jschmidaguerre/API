@@ -2,7 +2,7 @@ const Footer = () => {
     return (
         <div className="">
             <div className="flex justify-center">
-            <div className="w-3/4 h-1 bg-blue-100 mt-10 mb-10 rounded-xl"></div>
+            <div className="w-full h-1 bg-blue-100 mt-10 mb-10"></div>
         </div>
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 text-center md:text-left">
                 <div className="py-4">
@@ -17,9 +17,9 @@ const Footer = () => {
                 </div>
                 <div className="py-4">
                     <h5 className="font-bold text-lg mb-2">Más información</h5>
-                    <span>Sobre nosotros</span>
-                    <span>Ayuda</span>
-                    <span>Conviértete en Sitter</span>
+                    <p>Sobre nosotros</p>
+                    <p>Ayuda</p>
+                    <p>Conviértete en Sitter</p>
                 </div>
             </div>
         </div>
