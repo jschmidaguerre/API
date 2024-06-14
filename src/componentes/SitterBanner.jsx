@@ -6,8 +6,8 @@ const SitterBanner = () => {
         <div className="bg-white p-4">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="flex justify-center items-center text-center p-4 sm:flex-col">
-                    <p className="font-bold text-md ">Conviértete en sitter con nosotros!</p>
                     <img src="/images/perro.png" alt="" />
+                    <p className="font-bold text-md ">Conviértete en sitter con nosotros!</p>
                 </div>
                 <div className="flex justify-center items-center text-center p-4">
                     <Button text="Buscar Sitter"/>
