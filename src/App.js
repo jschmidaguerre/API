@@ -8,6 +8,7 @@ import SitterBanner from './componentes/SitterBanner';
 import SearchBar from './componentes/SearchBar';
 import ModalLogin from './componentes/ModalLogin';
 import React from 'react';
+import FilterBar from './componentes/FilterBar';
 
 function App() {
   const [showModal, setShowModal] = React.useState(true);
@@ -19,9 +20,11 @@ function App() {
   return (
     <div className="App">
       <HeroBanner/>
+      <FilterBar/>
       <SitterBanner/>
       <Footer/>
       <SearchBar/>
+
       <div>
             {showModal && <ModalLogin onClose={handleClose} />}
         </div>
