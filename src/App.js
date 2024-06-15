@@ -10,12 +10,21 @@ import ModalLogin from './componentes/ModalLogin';
 import React from 'react';
 import FilterBar from './componentes/FilterBar';
 import Card from './componentes/Card';
+import RestablecerContrasena from './componentes/RestablecerContrasena'
 
 function App() {
   const [showModal, setShowModal] = React.useState(true);
 
     const handleClose = () => {
         setShowModal(false);
+    };
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+    const handleCloseModal = () => {
+      setIsModalOpen(false);
+    };
+    const handleOpen = () => {
+        setIsModalOpen(true);
     };
   
   return (
@@ -26,6 +35,9 @@ function App() {
       <SitterBanner/>
       <Footer/>
       <SearchBar/>
+      <Button onClick={handleOpen} text="Restablecer Contraseña"></Button>
+      {isModalOpen && <RestablecerContrasena onClose={handleCloseModal} />}
+        
 
 
     </div>
