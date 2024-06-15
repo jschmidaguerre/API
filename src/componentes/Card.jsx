@@ -12,7 +12,7 @@ const Card = ({ nombre, categoria, duracion, costo, descripcion, estrellas, imag
     };
 
     return (
-        <div className="bg-gray-100 rounded-xl p-4 shadow-md w-64">
+        <div className="m-10 bg-gray-100 rounded-xl p-4 shadow-md w-64">
             <div className="flex justify-center">
                 <img src={imagen} alt={nombre} className="w-24 h-24 object-cover rounded-full" />
             </div>

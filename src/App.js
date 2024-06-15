@@ -33,12 +33,17 @@ function App() {
       <FilterBar/>
       <Card nombre="Juan Pinzón" categoria="Perros" duracion="10" costo="9990" descripcion="hola" estrellas="3" imagen="/images/elon.png"/>
       <SitterBanner/>
-      <Footer/>
-      <SearchBar/>
-      <Button onClick={handleOpen} text="Restablecer Contraseña"></Button>
-      {isModalOpen && <RestablecerContrasena onClose={handleCloseModal} />}
-        
 
+      <div class="flex justify-center m-10">
+        <SearchBar/>
+
+      </div>
+      <div class="flex justify-center m-10">
+        <Button onClick={handleOpen} text="Restablecer Contraseña"></Button>
+        {isModalOpen && <RestablecerContrasena onClose={handleCloseModal} />}    
+      </div>
+
+      <Footer/>
 
     </div>
   );
