@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import "./index.css";
 import Header from './componentes/Header';
 import Footer from './componentes/Footer';
@@ -29,6 +28,7 @@ function App() {
   
   return (
     <div className="App">
+      <Header/>
       <HeroBanner/>
       <FilterBar/>
       <Card nombre="Juan Pinzón" categoria="Perros" duracion="10" costo="9990" descripcion="hola" estrellas="3" imagen="/images/elon.png"/>
