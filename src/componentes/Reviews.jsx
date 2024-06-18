@@ -8,7 +8,7 @@ const Reviews = ({ isOpen, onClose, reviews }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-200 bg-opacity-75 flex justify-center items-center">
+    <div className="fixed inset-0 bg-gray-200 bg-opacity-75 flex justify-center items-center" >
       <div className="bg-white border-2 border-blue-100 rounded-lg max-w-2xl w-full p-4 overflow-hidden relative">
         {/* Botón de cierre mejorado */}
         <button 

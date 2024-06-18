@@ -32,7 +32,9 @@ function App() {
   // Datos de ejemplo para las reseñas
   const reviewsData = [
     { name: 'Ana Gomez', date: '2024-06-18', image: 'images/elon.png', rating: 5, comment: 'Producto excepcional.' },
-    { name: 'Roberto Diaz', date: '2024-06-19', image: 'images/elon.png', rating: 4, comment: 'Muy buen servicio.' }
+    { name: 'Roberto Diaz', date: '2024-06-19', image: 'images/elon.png', rating: 4, comment: 'Muy buen servicio.' },
+    { name: 'Carlos Gonzalez', date: '2024-06-19', image: 'images/elon.png', rating: 4, comment: 'Un servicio inigualable.' }
+
   ];
 
   return (
