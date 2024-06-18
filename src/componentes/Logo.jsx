@@ -1,5 +1,5 @@
 const Logo = () => {
-    return  <div className="logo w-32 h-32">
+    return  <div className="flex logo w-24 h-12">
                 <img src="images/logo2.png" alt="Logo" />
             </div>
 }
