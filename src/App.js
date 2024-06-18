@@ -10,6 +10,7 @@ import React from 'react';
 import FilterBar from './componentes/FilterBar';
 import Card from './componentes/Card';
 import RestablecerContrasena from './componentes/RestablecerContrasena'
+import ProfileBanner from './componentes/ProfileBanner';
 
 function App() {
   const [showModal, setShowModal] = React.useState(true);
@@ -30,6 +31,7 @@ function App() {
     <div className="App">
       <Header/>
       <HeroBanner/>
+      <ProfileBanner/>
       <FilterBar/>
       <Card nombre="Juan Pinzón" categoria="Perros" duracion="10" costo="9990" descripcion="hola" estrellas="3" imagen="/images/elon.png"/>
       <SitterBanner/>
@@ -42,6 +44,7 @@ function App() {
         <Button onClick={handleOpen} text="Restablecer Contraseña"></Button>
         {isModalOpen && <RestablecerContrasena onClose={handleCloseModal} />}    
       </div>
+
 
       <Footer/>
 
