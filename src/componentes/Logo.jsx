@@ -1,6 +1,6 @@
 const Logo = () => {
-    return  <div className="logo w-32 h-32">
-                <img src="images/logo2.png" alt="Logo" />
+    return  <div className="logo flex justify-start w-full md:w-auto">
+                <img src="images/logo.png" alt="Logo"/>
             </div>
 }
 
