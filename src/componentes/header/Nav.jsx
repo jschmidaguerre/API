@@ -5,7 +5,7 @@ const NavLinks = () => {
         <div className="flex justify-around items-center gap-2">
             <NavLink to="/conviertete-en-sitter" 
             className={
-                "p-2 bg-blue-300  hover:bg-blue-500 rounded-lg" 
+                "p-2 bg-blue-300  hover:bg-blue-500 rounded-lg border-2 hover:border-black" 
                 }>
             Conviertete en Sitter
             </NavLink>

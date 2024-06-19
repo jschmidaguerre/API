@@ -12,11 +12,7 @@ const SearchBar = () => {
             <div className="flex-[0_0_30%] w-full justify-around py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 text-sm sm:text-base">
                 <input 
                     type="text"
-<<<<<<< HEAD
                     className='w-11/12 pl-4 '
-=======
-                    className='w-11/12 ml-3'
->>>>>>> f03a97cc8dfe25eb7b623448e733a0ad0b80cfec
                     placeholder="Buscar por localidad..."
                     value={inputValue}
                     onChange={handleInputChange}
