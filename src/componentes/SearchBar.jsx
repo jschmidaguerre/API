@@ -12,7 +12,7 @@ const SearchBar = () => {
             <div className="flex-[0_0_30%] w-full justify-around py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 text-sm sm:text-base">
                 <input 
                     type="text"
-                    className='w-11/12'
+                    className='w-11/12 pl-4 '
                     placeholder="Buscar por localidad..."
                     value={inputValue}
                     onChange={handleInputChange}
@@ -29,4 +29,3 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
-// absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
