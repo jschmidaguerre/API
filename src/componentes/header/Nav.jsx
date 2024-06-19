@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
 
 const NavLinks = () => {
+
+    const isLoggedIn = false; // Variable que indica si el usuario está iniciado sesión
+    const nombre = 'Juanse';
     return (
         <div className="flex justify-around items-center gap-2">
             <NavLink to="/conviertete-en-sitter" 
@@ -12,6 +15,16 @@ const NavLinks = () => {
             <NavLink to="/login">Login</NavLink>
             <NavLink to="/crear-cuenta" className={"self-center"}>Crear Cuenta</NavLink>
             <NavLink to="/ayuda">Ayuda</NavLink>
+            <nav className="flex items-center justify-between hover:underline">
+                {isLoggedIn && (
+                    <NavLink to="/mi-perfil" className="text-gray-800">
+                    Hola, {nombre}
+                    </NavLink>
+                )}   
+                {isLoggedIn && (
+                    <img src="images/usuario.png" alt="usuario" className="w-8 pl-2"/>
+                )}
+            </nav>
         </div>
         
     );
