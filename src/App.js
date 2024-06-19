@@ -13,6 +13,7 @@ import ProfileBanner from './componentes/ProfileBanner';
 import ReviewBox from "./componentes/ReviewBox";
 import Reviews from "./componentes/Reviews";
 import SelectService from './componentes/SelectService';
+import ModalContratar from './componentes/ModalContratar';
 
 function App() {
   const [modals, setModals] = React.useState({
@@ -77,6 +78,10 @@ function App() {
         {modals.SelectService && <SelectService onClose={() => closeModal('SelectService')} />}    
       </div>
 
+      <div className="flex justify-center m-10">
+        <Button onClick={() => openModal('ModalContratar')} text="Contratar"/>
+        {modals.ModalContratar && <ModalContratar onClose={() => closeModal('ModalContratar')} />}    
+      </div>
 
 
       <Footer/>
