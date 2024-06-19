@@ -73,12 +73,12 @@ function App() {
         {modals.ModalLogin && <ModalLogin onClose={() => closeModal('ModalLogin')} />}    
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-10">
         <Button onClick={() => openModal('SelectService')} text="Seleccionar servicio"/>
         {modals.SelectService && <SelectService onClose={() => closeModal('SelectService')} />}    
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-10">
         <Button onClick={() => openModal('ModalContratar')} text="Contratar"/>
         {modals.ModalContratar && <ModalContratar onClose={() => closeModal('ModalContratar')} />}    
       </div>
