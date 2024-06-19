@@ -12,6 +12,7 @@ import RestablecerContrasena from './componentes/RestablecerContrasena'
 import ProfileBanner from './componentes/ProfileBanner';
 import ReviewBox from "./componentes/ReviewBox";
 import Reviews from "./componentes/Reviews";
+import SelectService from './componentes/SelectService';
 
 function App() {
   const [modals, setModals] = React.useState({
@@ -66,6 +67,19 @@ function App() {
           />
         )}
       </div>
+
+      <div className="flex justify-center m-10">
+        <Button onClick={() => openModal('ModalLogin')} text="Login"/>
+        {modals.ModalLogin && <ModalLogin onClose={() => closeModal('ModalLogin')} />}    
+      </div>
+
+      <div className="flex justify-center m-10">
+        <Button onClick={() => openModal('SelectService')} text="Seleccionar servicio"/>
+        {modals.SelectService && <SelectService onClose={() => closeModal('SelectService')} />}    
+      </div>
+
+
+
       <Footer/>
     </div>
   );
