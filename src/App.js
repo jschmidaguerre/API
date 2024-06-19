@@ -67,9 +67,8 @@ function App() {
           />
         )}
       </div>
-
       <div className="flex justify-center m-10">
-        <Button onClick={() => openModal('ModalLogin')} text="Login"/>
+        <Button onClick={() => openModal('ModalLogin')} text="Inicar sesión"/>
         {modals.ModalLogin && <ModalLogin onClose={() => closeModal('ModalLogin')} />}    
       </div>
 
@@ -81,6 +80,7 @@ function App() {
 
 
       <Footer/>
+
     </div>
   );
 }
