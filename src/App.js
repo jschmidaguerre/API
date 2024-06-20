@@ -71,17 +71,17 @@ function App() {
           />
         )}
       </div>
-      <div className="flex justify-center m-10">
+      <div className="flex justify-center">
         <Button onClick={() => openModal('ModalLogin')} text="Inicar sesión"/>
         {modals.ModalLogin && <ModalLogin onClose={() => closeModal('ModalLogin')} />}    
       </div>
 
-      <div className="flex justify-center m-10">
+      <div className="flex justify-center mt-10">
         <Button onClick={() => openModal('SelectService')} text="Seleccionar servicio"/>
         {modals.SelectService && <SelectService onClose={() => closeModal('SelectService')} />}    
       </div>
 
-      <div className="flex justify-center m-10">
+      <div className="flex justify-center mt-10">
         <Button onClick={() => openModal('ModalContratar')} text="Contratar"/>
         {modals.ModalContratar && <ModalContratar onClose={() => closeModal('ModalContratar')} />}    
       </div>
