@@ -14,6 +14,7 @@ import ReviewBox from "./componentes/ReviewBox";
 import Reviews from "./componentes/Reviews";
 import SelectService from './componentes/SelectService';
 import ModalContratar from './componentes/ModalContratar';
+import PerfilCreado from './componentes/perfilCreado/PerfilCreado';
 
 function App() {
   const [modals, setModals] = React.useState({
@@ -43,6 +44,9 @@ function App() {
     <div className="App">
       {/* ///////////////////Header/////////////////// */}
       <Header/>
+
+      {/* ///////////////////PerfilCreado/////////////////// */}
+      <PerfilCreado/>
 
       {/* ///////////////////Banner/////////////////// */}
       <HeroBanner/>
