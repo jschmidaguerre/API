@@ -18,6 +18,8 @@ import PerfilCreado from './componentes/perfilCreado/PerfilCreado';
 import MyReservations from './componentes/MyReservations';
 import MyPets from './componentes/MyPets';
 import PetModal from './componentes/PetModal';
+import CreateService from './componentes/CreateService';
+import ProfileCard from './componentes/ProfileCard';
 
 
 function App() {
@@ -170,6 +172,17 @@ function App() {
         <Button onClick={() => openModal('PetModal')} text="Agregar mascota"/>
         {modals.PetModal && <PetModal onClose={() => closeModal('PetModal')} />}    
       </div>
+
+      <div className="flex justify-center mt-10">
+        <Button onClick={() => openModal('CreateService')} text="Crear servicio"/>
+        {modals.CreateService && <CreateService onClose={() => closeModal('CreateService')} />}    
+      </div>
+
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+            <ProfileCard />
+        </div>
+
+      
 
       <Footer/>
 
