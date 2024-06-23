@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const PerfilCreado = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); //Solo aparece cuando está en true
   const navigate = useNavigate();
 
   if (!isLoggedIn) {
