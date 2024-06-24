@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './Button'; // Asegúrate de que el componente Button está correctamente importado.
 
 const RestablecerContrasena = ({ onClose }) => {
     return (
@@ -18,7 +17,9 @@ const RestablecerContrasena = ({ onClose }) => {
                     <input type="password" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
                 </div>
                 <div className="mt-4 flex justify-center">
-                    <Button text="Reestablecer Contraseña" />
+                    <button className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Reestablecer Contraseña
+                    </button>
                 </div>
             </div>
         </div>

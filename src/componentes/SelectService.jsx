@@ -39,8 +39,9 @@ function SelectService({ onClose }) {
         </div>
         <hr className="my-2 border-t border-blue-100" />
         <div class="flex justify-center">
-            <Button text="Hecho">
-            </Button>
+        <button type="submit" className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Hecho
+            </button>
 
         </div>
       </div>

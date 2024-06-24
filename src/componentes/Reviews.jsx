@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ReviewBox from './ReviewBox'; // Asumiendo que ReviewBox está en el mismo directorio
-import Button from './Button';
 
 const Reviews = ({ isOpen, onClose, reviews }) => {
   const [comment, setComment] = useState('');
@@ -8,7 +7,7 @@ const Reviews = ({ isOpen, onClose, reviews }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-200 bg-opacity-75 flex justify-center items-center" >
+    <div className="fixed inset-0 bg-gray-200 bg-opacity-75 flex justify-center items-center">
       <div className="bg-white border-2 border-blue-100 rounded-lg max-w-2xl w-full p-4 overflow-hidden relative">
         {/* Botón de cierre mejorado */}
         <button 
@@ -35,10 +34,15 @@ const Reviews = ({ isOpen, onClose, reviews }) => {
           ></textarea>
         </div>
         <div className="flex justify-center mt-4">
-          <Button text="Enviar" onClick={() => {
-            console.log("Reseña enviada:", comment); // Aquí puedes agregar la lógica para manejar el envío del comentario
-            setComment(''); // Limpiar el campo después de enviar
-          }} />
+          <button
+            className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => {
+              console.log("Reseña enviada:", comment); // Aquí puedes agregar la lógica para manejar el envío del comentario
+              setComment(''); // Limpiar el campo después de enviar
+            }}
+          >
+            Enviar
+          </button>
         </div>
       </div>
     </div>

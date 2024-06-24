@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './Button';
 
 const ModalLogin = ({ onClose }) => {
     // Asegurarse de detener la propagación del clic dentro del modal para no cerrar por error
@@ -27,24 +26,26 @@ const ModalLogin = ({ onClose }) => {
                     <input type="password" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="********" />
                 </div>
                 <div className="text-center text-sm text-blue-500 hover:text-blue-700 cursor-pointer">¿Olvidaste tu contraseña?</div>
-                <div class="flex justify-center">
-
-                    <Button text="Login" />
+                <div className="flex justify-center">
+                    <button className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Login
+                    </button>
                 </div>
 
-                <div class="grid grid-cols-3 items-center">
+                <div className="grid grid-cols-3 items-center">
                     <div className="w-full h-1 bg-blue-100 mt-10 mb-10"></div>
                     <div className="text-center font-medium">O</div>
                     <div className="w-full h-1 bg-blue-100 mt-10 mb-10"></div>
-
                 </div>
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Crear cuenta</label>
                     <input type="email" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="nuevoemail@ejemplo.com" />
                 </div>
-                <div class="flex justify-center">
-                <Button text="Continuar" />
+                <div className="flex justify-center">
+                    <button className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Continuar
+                    </button>
                 </div>
             </div>
         </div>

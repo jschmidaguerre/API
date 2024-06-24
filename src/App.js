@@ -128,13 +128,18 @@ function App() {
         <SearchBar/>
       </div>
       <div className="flex justify-center m-10">
-        <Button onClick={() => openModal('restablecerContrasena')} text="Restablecer Contraseña"/>
-        {modals.restablecerContrasena && <RestablecerContrasena onClose={() => closeModal('restablecerContrasena')} />}    
-      </div>
+            <button
+                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={() => openModal('restablecerContrasena')}
+            >
+                Restablecer Contraseña
+            </button>
+            {modals.restablecerContrasena && <RestablecerContrasena onClose={() => closeModal('restablecerContrasena')} />}
+        </div>
       
       <ReviewBox name="Juan Pinzón" date="24/04/2024" image="images/elon.png" rating="3" comment="Increíble servicio"/>
       <div className="container mx-auto px-4">
-        <button onClick={() => openModal('reviews')} className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button onClick={() => openModal('reviews')} className="w-40 h-12 bg-blue-200 text-black rounded-full transition duration-150 ease-in-out hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-md transform hover:-translate-y-1 active:translate-y-0.5">
           Mostrar Reseñas
         </button>
         {modals.reviews && (
@@ -146,19 +151,34 @@ function App() {
         )}
       </div>
       <div className="flex justify-center">
-        <Button onClick={() => openModal('ModalLogin')} text="Inicar sesión"/>
-        {modals.ModalLogin && <ModalLogin onClose={() => closeModal('ModalLogin')} />}    
-      </div>
+            <button
+                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={() => openModal('ModalLogin')}
+            >
+                Iniciar sesión
+            </button>
+            {modals.ModalLogin && <ModalLogin onClose={() => closeModal('ModalLogin')} />}
+        </div>
 
       <div className="flex justify-center mt-10">
-        <Button onClick={() => openModal('SelectService')} text="Seleccionar servicio"/>
-        {modals.SelectService && <SelectService onClose={() => closeModal('SelectService')} />}    
-      </div>
+            <button
+                className="w-40 h-12 bg-blue-200 text-black rounded-full transition duration-150 ease-in-out hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-md transform hover:-translate-y-1 active:translate-y-0.5"
+                onClick={() => openModal('SelectService')}
+            >
+                Seleccionar servicio
+            </button>
+            {modals.SelectService && <SelectService onClose={() => closeModal('SelectService')} />}
+        </div>
 
       <div className="flex justify-center mt-10">
-        <Button onClick={() => openModal('ModalContratar')} text="Contratar"/>
-        {modals.ModalContratar && <ModalContratar onClose={() => closeModal('ModalContratar')} />}    
-      </div>
+            <button
+                className="w-40 h-12 bg-blue-200 text-black rounded-full transition duration-150 ease-in-out hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-md transform hover:-translate-y-1 active:translate-y-0.5"
+                onClick={() => openModal('ModalContratar')}
+            >
+                Contratar
+            </button>
+            {modals.ModalContratar && <ModalContratar onClose={() => closeModal('ModalContratar')} />}
+        </div>
 
       <div className="flex justify-center items-center min-h-screen">
         <MyReservations reservations={reservationsData} />
@@ -169,14 +189,24 @@ function App() {
       </div>
 
       <div className="flex justify-center mt-10">
-        <Button onClick={() => openModal('PetModal')} text="Agregar mascota"/>
-        {modals.PetModal && <PetModal onClose={() => closeModal('PetModal')} />}    
-      </div>
+            <button
+                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={() => openModal('PetModal')}
+            >
+                Agregar mascota
+            </button>
+            {modals.PetModal && <PetModal onClose={() => closeModal('PetModal')} />}
+        </div>
 
       <div className="flex justify-center mt-10">
-        <Button onClick={() => openModal('CreateService')} text="Crear servicio"/>
-        {modals.CreateService && <CreateService onClose={() => closeModal('CreateService')} />}    
-      </div>
+            <button
+                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={() => openModal('CreateService')}
+            >
+                Crear servicio
+            </button>
+            {modals.CreateService && <CreateService onClose={() => closeModal('CreateService')} />}
+        </div>
 
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
             <ProfileCard />
