@@ -10,7 +10,8 @@ const serviceSchema = new mongoose.Schema({
     serviceType: { type: String, required: true },
     description: { type: String, required: true },
     stars: { type: Number, default: 0 }, // Añadiendo una propiedad de estrellas
-    image: { type: String, default: '' } // Añadiendo una propiedad de imagen con valor por defecto ''
+    image: { type: String, default: '' }, // Añadiendo una propiedad de imagen con valor por defecto ''
+    localidad: { type: String } // Añadiendo la nueva propiedad localidad
 });
 
 const Service = mongoose.model('Service', serviceSchema);

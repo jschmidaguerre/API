@@ -130,7 +130,7 @@ function App() {
       <HeroBanner/>
       <ProfileBanner/>
       <FilterBar/>
-      <Card nombre="Juan Pinzón" categoria="Perros" duracion="10" costo="9990" descripcion="hola" estrellas="3" imagen="/images/elon.png"/>
+      <ServiceList/>
       <SitterBanner/>
       <div className="flex justify-center m-10">
         <SearchBar/>
@@ -225,7 +225,7 @@ function App() {
       
 
       <Footer/>
-      <ServiceList/>
+      
 
     </div>
   );

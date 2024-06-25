@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 
+const barrios = [
+    'Palermo', 'Recoleta', 'Belgrano', 'Almagro', 'Caballito',
+    'San Telmo', 'Villa Urquiza', 'Retiro', 'Puerto Madero', 'Flores'
+];
+
 const CreateService = ({ onClose }) => {
     const [formData, setFormData] = useState({
         name: '',
@@ -11,6 +16,7 @@ const CreateService = ({ onClose }) => {
         serviceType: '',
         description: '',
         image: '/images/elon.png',
+        localidad: '', // Agregando el campo localidad al estado inicial
     });
 
     const handleChange = (e) => {
@@ -139,6 +145,20 @@ const CreateService = ({ onClose }) => {
                                 <option value="Visitas">Visitas</option>
                                 <option value="Paseo">Paseo</option>
                                 <option value="Entrenamiento">Entrenamiento</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-gray-700">Localidad:</label>
+                            <select
+                                name="localidad"
+                                value={formData.localidad}
+                                onChange={handleChange}
+                                className="mt-1 p-2 border rounded w-full"
+                            >
+                                <option value="">Selecciona una localidad</option>
+                                {barrios.map(barrio => (
+                                    <option key={barrio} value={barrio}>{barrio}</option>
+                                ))}
                             </select>
                         </div>
                         <div className="md:col-span-2">
