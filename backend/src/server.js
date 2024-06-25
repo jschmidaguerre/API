@@ -49,6 +49,27 @@ app.get('/usuarios', async (req, res) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+const Pet = mongoose.model('Pet', petSchema);
+
+// Endpoint to get all pets
+app.get('/pets', async (req, res) => {
+    try {
+        const pets = await Pet.find();
+        res.json(pets);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+app.post('/pets', async (req, res) => {
+  try {
+      const newPet = new Pet(req.body);  // `req.body` will be expected to be in the format of the JSON object you provided
+      const savedPet = await newPet.save();
+      res.status(201).json(savedPet);
+  } catch (error) {
+      res.status(400).send(error);
+  }
+});
 mongoose.connect(uri)
   .then(() => {
     console.log('Connection success');
