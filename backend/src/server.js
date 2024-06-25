@@ -3,6 +3,8 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import usuario from './models/usuario.model.js';
 import Pet from './models/pet.model.js';  // Importación correcta del modelo Pet
+import Service from './models/service.model.js';  // Importación correcta del modelo Service
+
 
 const app = express();
 const port = 3000;
@@ -13,6 +15,29 @@ app.use(cors());
 
 
 app.use(express.json());  // Middleware para parsear JSON
+
+// Endpoint para obtener todos los servicios
+app.get('/services', async (req, res) => {
+  try {
+    const services = await Service.find();
+    res.json({ services });
+  } catch (error) {
+    console.log('Error fetching services:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Endpoint para crear servicios
+app.post('/services', async (req, res) => {
+  try {
+    const newService = new Service(req.body);
+    const savedService = await newService.save();
+    res.status(201).json({ service: savedService });
+  } catch (error) {
+    console.log('Error creating service:', error);
+    res.status(400).json({ message: 'Error creating service', error });
+  }
+});
 
 // Endpoint para crear usuarios
 app.post('/usuarios', async (req, res) => {
@@ -93,6 +118,31 @@ app.delete('/pets/:id', async (req, res) => {
   } catch (error) {
     console.log('Error deleting pet:', error);
     res.status(500).json({ message: 'Error deleting pet', error });
+  }
+});
+
+// Endpoint para eliminar un servicio por ID
+app.delete('/services/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(`Received request to delete service with id: ${id}`); // Log para ver el ID recibido
+
+    // Convertir el ID a ObjectId utilizando 'new'
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid ID format' });
+    }
+
+    const deletedService = await Service.findByIdAndDelete(new mongoose.Types.ObjectId(id));
+    if (!deletedService) {
+      console.log(`Service with id: ${id} not found`);
+      return res.status(404).json({ message: 'Service not found' });
+    }
+
+    console.log(`Service with id: ${id} deleted successfully`);
+    res.status(200).json({ message: 'Service deleted successfully' });
+  } catch (error) {
+    console.log('Error deleting service:', error);
+    res.status(500).json({ message: 'Error deleting service', error });
   }
 });
 

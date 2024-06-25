@@ -20,6 +20,7 @@ import MyPets from './componentes/MyPets';
 import PetModal from './componentes/PetModal';
 import CreateService from './componentes/CreateService';
 import ProfileCard from './componentes/ProfileCard';
+import ServiceList from './componentes/ServiceList';
 
 
 function App() {
@@ -146,7 +147,7 @@ function App() {
       
       <ReviewBox name="Juan Pinzón" date="24/04/2024" image="images/elon.png" rating="3" comment="Increíble servicio"/>
       <div className="container mx-auto px-4">
-        <button onClick={() => openModal('reviews')} className="w-40 h-12 bg-blue-200 text-black rounded-full transition duration-150 ease-in-out hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-md transform hover:-translate-y-1 active:translate-y-0.5">
+        <button onClick={() => openModal('reviews')} className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Mostrar Reseñas
         </button>
         {modals.reviews && (
@@ -169,7 +170,7 @@ function App() {
 
       <div className="flex justify-center mt-10">
             <button
-                className="w-40 h-12 bg-blue-200 text-black rounded-full transition duration-150 ease-in-out hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-md transform hover:-translate-y-1 active:translate-y-0.5"
+                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 onClick={() => openModal('SelectService')}
             >
                 Seleccionar servicio
@@ -179,7 +180,7 @@ function App() {
 
       <div className="flex justify-center mt-10">
             <button
-                className="w-40 h-12 bg-blue-200 text-black rounded-full transition duration-150 ease-in-out hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-md transform hover:-translate-y-1 active:translate-y-0.5"
+                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 onClick={() => openModal('ModalContratar')}
             >
                 Contratar
@@ -224,6 +225,7 @@ function App() {
       
 
       <Footer/>
+      <ServiceList/>
 
     </div>
   );

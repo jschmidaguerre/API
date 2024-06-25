@@ -19,8 +19,7 @@ const Card = ({ nombre, categoria, duracion, costo, descripcion, estrellas, imag
             <div className="text-center my-4">
                 {renderStars()}
                 <h2 className="text-md font-semibold mb-2">{nombre}</h2>
-                <div class="mt-5 mb-5">
-
+                <div className="mt-5 mb-5">
                     <Button text="Contratar" />
                 </div>
             </div>
