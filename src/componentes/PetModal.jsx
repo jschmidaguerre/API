@@ -10,6 +10,42 @@ const PetModal = ({ onClose, onSubmit }) => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get('name'),
+      gender: formData.get('gender'),
+      neutered: formData.get('neutered'),
+      age: parseInt(formData.get('age'), 10),
+      weight: parseFloat(formData.get('weight')),
+      type: formData.get('type') // Añadir el tipo de mascota
+    };
+
+    fetch('http://localhost:3000/pets', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+      onSubmit();  // Call the onSubmit prop to refresh data or perform other actions
+      onClose();   // Close the modal after successful submission
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white rounded-lg border border-blue-100 p-6 w-full max-w-md relative">
@@ -20,7 +56,7 @@ const PetModal = ({ onClose, onSubmit }) => {
           &times;
         </button>
         <h2 className="text-2xl font-bold mb-4">Información de la Mascota</h2>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700">Nombre:</label>
             <input 
@@ -32,12 +68,15 @@ const PetModal = ({ onClose, onSubmit }) => {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Tipo de mascota:</label>
-            <input 
-              type="text" 
-              className="mt-1 block w-full border border-gray-300 rounded-lg p-2" 
-              name="breed" 
-              required 
-            />
+            <select 
+              name="type" 
+              className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+              required
+            >
+              <option value="">Selecciona el tipo de mascota</option>
+              <option value="Perro">Perro</option>
+              <option value="Gato">Gato</option>
+            </select>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Género:</label>

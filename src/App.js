@@ -23,6 +23,13 @@ import ProfileCard from './componentes/ProfileCard';
 
 
 function App() {
+  
+
+  const handleSubmit = () => {
+    // Lógica para refrescar los datos o realizar otras acciones necesarias
+    console.log('New pet added');
+    // Aquí podrías actualizar la lista de mascotas si fuera necesario
+  };
   const [modals, setModals] = React.useState({
     restablecerContrasena: false,
     reviews: false,
@@ -189,14 +196,16 @@ function App() {
       </div>
 
       <div className="flex justify-center mt-10">
-            <button
-                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={() => openModal('PetModal')}
-            >
-                Agregar mascota
-            </button>
-            {modals.PetModal && <PetModal onClose={() => closeModal('PetModal')} />}
-        </div>
+      <button
+        className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={() => openModal('PetModal')}
+      >
+        Agregar mascota
+      </button>
+      {modals.PetModal && (
+        <PetModal onClose={() => closeModal('PetModal')} onSubmit={handleSubmit} />
+      )}
+    </div>
 
       <div className="flex justify-center mt-10">
             <button
