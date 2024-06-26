@@ -22,10 +22,13 @@ import CreateService from './componentes/CreateService';
 import ProfileCard from './componentes/ProfileCard';
 import ServiceList from './componentes/ServiceList';
 
+import { FilterProvider } from './FilterContext'; // Asegúrate de importar el FilterProvider
+
+
 
 function App() {
-  
 
+  
   const handleSubmit = () => {
     // Lógica para refrescar los datos o realizar otras acciones necesarias
     console.log('New pet added');

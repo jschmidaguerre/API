@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button'; // Asegúrate de que el componente Button está correctamente importado.
 
-const Card = ({ nombre, categoria, duracion, costo, descripcion, estrellas, imagen }) => {
+const Card = ({ nombre, categoria, duracion, costo, descripcion, estrellas, imagen,localidad }) => {
     // Función para generar las estrellas de calificación
     const renderStars = () => {
         let stars = [];
@@ -27,6 +27,8 @@ const Card = ({ nombre, categoria, duracion, costo, descripcion, estrellas, imag
                 <li><strong>Categoría:</strong> {categoria}</li>
                 <li><strong>Duración:</strong> {duracion}</li>
                 <li><strong>Costo:</strong> ${costo}</li>
+                <li><strong>Localidad:</strong> {localidad}</li>
+
                 <li className="truncate"><strong>Descripción:</strong> {descripcion}</li>
             </ul>
         </div>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import Button from './Button'; // Asegúrate de que el componente Button está correctamente importado.
+import React, { useState, useContext } from 'react'; // Add useContext here
+import { FilterContext } from '../FilterContext';
+
 
 const FilterBar = () => {
     const [showCalendar, setShowCalendar] = useState({ from: false, to: false });
@@ -11,6 +12,18 @@ const FilterBar = () => {
     const [showCategoryMenu, setShowCategoryMenu] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('');
 
+
+    const { setFilters } = useContext(FilterContext); // Usamos setFilters para actualizar el contexto
+
+    const applyFilters = () => {
+        setFilters({
+            selectedLocality,
+            selectedService,
+            selectedCategory,
+            selectedDate,
+        });
+    };
+    
     const barrios = [
         'Palermo', 'Recoleta', 'Belgrano', 'Almagro', 'Caballito',
         'San Telmo', 'Villa Urquiza', 'Retiro', 'Puerto Madero', 'Flores'
@@ -157,7 +170,7 @@ const FilterBar = () => {
                 </div>
             </div>
             <div className="flex gap-2 m-5">
-                <Button text="Buscar" />
+                <button class="bg-blue-100 border border-gray-300 text-gray-800 py-2 px-12 rounded-full shadow" onClick={applyFilters}>Buscar</button>
                 <button className="bg-white border border-gray-300 text-gray-800 py-2 px-4 rounded-full shadow">Filtrar</button>
             </div>
         </div>

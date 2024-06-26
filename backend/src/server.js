@@ -16,10 +16,43 @@ app.use(cors());
 
 app.use(express.json());  // Middleware para parsear JSON
 
-// Endpoint para obtener todos los servicios
+// Endpoint para eliminar un servicio por ID
+app.delete('/services/:id', async (req, res) => {
+  const { id } = req.params;  // Extraer el ID del servicio de los parámetros de la URL
+
+  // Validar si el ID tiene un formato válido de MongoDB ObjectId
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    console.log(`Failed to delete: Invalid ID format provided (${id}).`); // Log de error si el formato de ID es inválido
+    return res.status(400).json({ message: 'Invalid ID format' });
+  }
+
+  try {
+    const deletedService = await Service.findByIdAndDelete(id);
+    if (!deletedService) {
+      console.log(`Deletion attempt failed: No service found with ID ${id}.`); // Log cuando no se encuentra el servicio
+      return res.status(404).json({ message: 'Service not found' });
+    }
+
+    console.log(`Service with ID ${id} has been deleted successfully.`); // Log de éxito al eliminar el servicio
+    res.status(200).json({ message: 'Service deleted successfully' });
+  } catch (error) {
+    console.log(`Error deleting service with ID ${id}:`, error); // Log de cualquier otro error que ocurra
+    res.status(500).json({ message: 'Error deleting service', error });
+  }
+});
+
+
 app.get('/services', async (req, res) => {
   try {
-    const services = await Service.find();
+    // Construyendo un objeto de consulta basado en parámetros recibidos
+    const query = {};
+    if (req.query.localidad) query.localidad = req.query.localidad;
+    if (req.query.serviceType) query.serviceType = req.query.serviceType;
+    if (req.query.category) query.category = req.query.category;
+    if (req.query.fromDate) query.fromDate = { $gte: new Date(req.query.fromDate) };
+    if (req.query.toDate) query.toDate = { $lte: new Date(req.query.toDate) };
+
+    const services = await Service.find(query);
     res.json({ services });
   } catch (error) {
     console.log('Error fetching services:', error);
