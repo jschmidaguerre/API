@@ -4,11 +4,15 @@ import mongoose from 'mongoose';
 import usuario from './models/usuario.model.js';
 import Pet from './models/pet.model.js';  // Importación correcta del modelo Pet
 import Service from './models/service.model.js';  // Importación correcta del modelo Service
+import login from './controllers/login.js';
+import register from './controllers/register.js';
+import id from './controllers/getUserById.js';
 
-
+//server
 const app = express();
 const port = 3000;
 const uri = 'mongodb://127.0.0.1:27017/test';
+
 
 // Configuración de CORS para permitir solicitudes de cualquier origen
 app.use(cors());
@@ -71,6 +75,11 @@ app.post('/services', async (req, res) => {
     res.status(400).json({ message: 'Error creating service', error });
   }
 });
+
+app.get('/user/:id', id)
+app.post('/register', register)
+app.post('/login', login)
+
 
 // Endpoint para crear usuarios
 app.post('/usuarios', async (req, res) => {
