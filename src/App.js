@@ -149,7 +149,6 @@ function App() {
             </button>
             {modals.restablecerContrasena && <RestablecerContrasena onClose={() => closeModal('restablecerContrasena')} />}
         </div>
-            />}
 
       <ReviewBox name="Juan Pinzón" date="24/04/2024" image="images/elon.png" rating="3" comment="Increíble servicio"/>
       <div className="container mx-auto px-4">
