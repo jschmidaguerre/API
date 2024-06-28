@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useAuth } from '../AuthContext'; // Verifica que la ruta de importación sea correcta
 
 const ModalLogin = ({ isOpen, onClose }) => {
+    const { login } = useAuth(); // Acceso a la función de login del contexto
     const [loginData, setLoginData] = useState({
         correo: '',
         contrasena: ''
@@ -29,14 +31,15 @@ const ModalLogin = ({ isOpen, onClose }) => {
                 },
                 body: JSON.stringify(loginData)
             });
-
+    
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-
-            const result = await response.json();
-            console.log('Login successful:', result);
-            onClose(); // Close the modal on successful login
+    
+            const userData = await response.json();
+            console.log("Login data received:", userData);
+            login(userData); // Pasa los datos del usuario al contexto para actualizar el estado global
+            onClose(); // Cierra el modal en el inicio de sesión exitoso
         } catch (error) {
             console.error('Failed to login:', error);
             setError('Failed to login: ' + error.message);
