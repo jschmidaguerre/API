@@ -22,6 +22,7 @@ import CreateService from './componentes/CreateService';
 import ProfileCard from './componentes/ProfileCard';
 import ServiceList from './componentes/ServiceList';
 import RegisterModal from './componentes/RegisterModal'
+import MyServices from './componentes/MyServices';
 
 import { FilterProvider } from './FilterContext'; // Asegúrate de importar el FilterProvider
 
@@ -234,6 +235,8 @@ function App() {
                 </button>
                 {modals.registerModal && <RegisterModal isOpen={modals.registerModal} onClose={() => closeModal('registerModal')} />}
             </div>
+
+      <MyServices/>
 
       
 

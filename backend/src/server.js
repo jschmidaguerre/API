@@ -37,7 +37,6 @@ app.post('/pets', async (req, res) => {
   }
 
   try {
-    // Crear una nueva mascota
     const pet = new Pet({
       name,
       gender,
@@ -47,10 +46,8 @@ app.post('/pets', async (req, res) => {
       owner: ownerId
     });
 
-    // Guardar la mascota en la base de datos
     const savedPet = await pet.save();
 
-    // Asociar la mascota al usuario
     const user = await User.findById(ownerId);
     user.pets.push(savedPet._id);
     await user.save();
@@ -61,6 +58,47 @@ app.post('/pets', async (req, res) => {
     res.status(400).json({ message: 'Error creating pet', error });
   }
 });
+
+
+// Endpoint para crear servicios
+app.post('/services', async (req, res) => {
+  const { name, category, frequency, fromDate, toDate, cost, serviceType, description, image, localidad, owner } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(owner)) {
+      return res.status(400).json({ message: 'Invalid owner ID format' });
+  }
+
+  try {
+      // Crear un nuevo servicio
+      const newService = new Service({
+          name,
+          category,
+          frequency,
+          fromDate,
+          toDate,
+          cost,
+          serviceType,
+          description,
+          image,
+          localidad,
+          owner
+      });
+
+      // Guardar el servicio en la base de datos
+      const savedService = await newService.save();
+
+      // Asociar el servicio al usuario
+      const user = await User.findById(owner);
+      user.services.push(savedService._id);
+      await user.save();
+
+      res.status(201).json({ service: savedService });
+  } catch (error) {
+      console.log('Error creating service:', error);
+      res.status(400).json({ message: 'Error creating service', error });
+  }
+});
+
 
 // Endpoint para obtener todas las mascotas de un usuario específico
 app.get('/pets', async (req, res) => {

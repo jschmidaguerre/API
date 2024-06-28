@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuth } from '../AuthContext'; // Verifica que la ruta sea correcta
 
 const barrios = [
     'Palermo', 'Recoleta', 'Belgrano', 'Almagro', 'Caballito',
@@ -6,6 +7,7 @@ const barrios = [
 ];
 
 const CreateService = ({ onClose }) => {
+    const { user } = useAuth(); // Obtener el usuario logueado desde el contexto
     const [formData, setFormData] = useState({
         name: '',
         category: '',
@@ -36,12 +38,13 @@ const CreateService = ({ onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const data = { ...formData, owner: user._id }; // Añadir el ID del usuario al formulario
         fetch('http://localhost:3000/services', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(data),
         })
         .then(response => response.json())
         .then(data => {
