@@ -219,9 +219,7 @@ function App() {
         )}
       </div>
       <div className="flex justify-center">
-      <button onClick={() => openModal('reviews')} className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Mostrar Reseñas
-        </button>
+      
             {modals.ModalLogin && <ModalLogin isOpen={modals.ModalLogin} onClose={() => closeModal('ModalLogin')} />}        </div>
 
       <div className="flex justify-center mt-10">
