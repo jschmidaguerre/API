@@ -36,11 +36,11 @@ const RegisterModal = ({ isOpen, onClose }) => {
             }
 
             const result = await response.json();
-            console.log('Registration successful:', result);
+            console.log('Registro exitoso', result);
             onClose(); // Close the modal on successful registration
         } catch (error) {
-            console.error('Failed to register:', error);
-            setError('Failed to register: ' + error.message);
+            console.error('Falla al registrar:', error);
+            setError('Falla al registrar ' + error.message);
         } finally {
             setIsLoading(false);
         }
@@ -53,11 +53,11 @@ const RegisterModal = ({ isOpen, onClose }) => {
     return (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
             <div className="bg-white p-8 rounded-lg w-full max-w-md" onClick={e => e.stopPropagation()}>
-                <h2 className="text-xl font-bold text-center">Register New User</h2>
+                <h2 className="text-xl font-bold text-center">Registrar usuario</h2>
                 {error && <p className="text-red-500 text-sm">{error}</p>}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Name</label>
+                        <label className="block text-sm font-medium text-gray-700">Nombre</label>
                         <input type="text" name="nombre" value={userData.nombre} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
                     </div>
                     <div>
@@ -65,7 +65,7 @@ const RegisterModal = ({ isOpen, onClose }) => {
                         <input type="email" name="correo" value={userData.correo} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Password</label>
+                        <label className="block text-sm font-medium text-gray-700">Contraseña</label>
                         <input type="password" name="contrasena" value={userData.contrasena} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
                     </div>
                     <div className="flex justify-end">

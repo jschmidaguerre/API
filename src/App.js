@@ -24,6 +24,7 @@ import ServiceList from './componentes/ServiceList';
 import RegisterModal from './componentes/RegisterModal'
 import MyServices from './componentes/MyServices';
 
+
 import { FilterProvider } from './FilterContext'; // Asegúrate de importar el FilterProvider
 
 
@@ -126,19 +127,18 @@ function App() {
   return (
     <div className="App">
       {/* ///////////////////Header/////////////////// */}
-      <Header/>
-
+      <Header onLoginClick={() => openModal('login')} onCreateUserClick={() => openModal('registerModal')} />
       {/* ///////////////////PerfilCreado/////////////////// */}
       <PerfilCreado/>
 
       {/* ///////////////////Banner/////////////////// */}
+      
       <HeroBanner/>
       <ProfileBanner/>
       <FilterBar/>
       <ServiceList/>
       <SitterBanner/>
       <div className="flex justify-center m-10">
-        <SearchBar/>
       </div>
       <div className="flex justify-center m-10">
             <button
@@ -164,12 +164,7 @@ function App() {
         )}
       </div>
       <div className="flex justify-center">
-            <button
-                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={() => openModal('ModalLogin')}
-            >
-                Iniciar sesión
-            </button>
+            
             {modals.ModalLogin && <ModalLogin isOpen={modals.ModalLogin} onClose={() => closeModal('ModalLogin')} />}        </div>
 
       <div className="flex justify-center mt-10">
