@@ -222,12 +222,7 @@ function App() {
       </div>
 
       <div className="flex justify-center mt-10">
-                <button
-                    className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => openModal('registerModal')}
-                >
-                    Crear usuario
-                </button>
+                
                 {modals.registerModal && <RegisterModal isOpen={modals.registerModal} onClose={() => closeModal('registerModal')} />}
             </div>
 

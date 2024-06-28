@@ -24,6 +24,10 @@ const ProfileBanner = () => {
         <button className="text-3xl cursor-pointer" onClick={() => handleClick('Mis reseñas')}>🌟</button>
         <div className="text-sm mt-2">Mis reseñas</div>
       </div>
+      <div className="text-center">
+        <button className="text-3xl cursor-pointer" onClick={() => handleClick('Mis servicios')}>🛠️</button>
+        <div className="text-sm mt-2">Mis servicios</div>
+      </div>
     </div>
   );
 };
