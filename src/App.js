@@ -127,7 +127,7 @@ function App() {
   return (
     <div className="App">
       {/* ///////////////////Header/////////////////// */}
-      <Header onLoginClick={() => openModal('login')} onCreateUserClick={() => openModal('registerModal')} />
+      <Header onLoginClick={() => openModal('ModalLogin')} onCreateUserClick={() => openModal('registerModal')} />
       {/* ///////////////////PerfilCreado/////////////////// */}
       <PerfilCreado/>
 
@@ -149,7 +149,8 @@ function App() {
             </button>
             {modals.restablecerContrasena && <RestablecerContrasena onClose={() => closeModal('restablecerContrasena')} />}
         </div>
-      
+            />}
+
       <ReviewBox name="Juan Pinzón" date="24/04/2024" image="images/elon.png" rating="3" comment="Increíble servicio"/>
       <div className="container mx-auto px-4">
         <button onClick={() => openModal('reviews')} className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

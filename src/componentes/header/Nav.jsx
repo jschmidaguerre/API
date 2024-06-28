@@ -16,6 +16,9 @@ const Nav = ({ onLoginClick, onCreateUserClick }) => {
       <button onClick={onCreateUserClick} className="text-blue-500 hover:underline m-5">
         Crear Cuenta
       </button>
+      <button className="text-blue-500 hover:underline m-5">
+        Mi perfil
+      </button>
       {isLoggedIn && (
         <>
           <NavLink to="/mi-perfil" className="text-gray-800">
