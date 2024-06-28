@@ -82,8 +82,8 @@ const FilterBar = () => {
     };
 
     return (
-        <div className="mb-4 flex flex-col md:flex-row justify-between items-center p-4 bg-gray-100 relative">
-            <div className="flex flex-col md:flex-row gap-2 mb-4 md:mb-0">
+        <div className="flex flex-col md:flex-row justify-between items-center p-4 bg-gray-100 relative">
+            <div className="flex flex-col md:flex-row gap-2 md:mb-0">
                 <div className="relative">
                     <button onClick={toggleLocalityMenu} className="flex items-center px-4 py-2 border border-gray-300 rounded shadow">
                         📍 {selectedLocality || 'Localidad'}

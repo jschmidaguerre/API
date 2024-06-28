@@ -39,7 +39,7 @@ const ProfileCard = () => {
     }
 
     return (
-        <div className="max-w-sm mx-auto bg-white border border-gray-300 rounded-lg shadow-md p-6">
+        <div className="mt-10 max-w-sm mx-auto bg-white border border-gray-300 rounded-lg shadow-md p-6">
             <div className="flex flex-col items-center">
                 <img className="w-32 h-32 rounded-full mb-4" src={profileData.photo} alt="Profile" />
                 {isEditing ? (

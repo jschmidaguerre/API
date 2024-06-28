@@ -3,7 +3,7 @@ import Button from './Button';
 
 const SitterBanner = () => {
     return (
-        <div className="bg-white p-4">
+        <div className="bg-white p-4 mt-20">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="flex justify-center items-center text-center p-4 sm:flex-col">
                     <img src="/images/perro.png" alt="" />

@@ -1,5 +1,4 @@
-import React from 'react';
-import Header from './componentes/header/Header';
+import React, { useState } from 'react';import Header from './componentes/header/Header';
 import Footer from './componentes/Footer';
 import HeroBanner from './componentes/HeroBanner';
 import Button from './componentes/Button';
@@ -26,12 +25,76 @@ import MyServices from './componentes/MyServices';
 
 
 import { FilterProvider } from './FilterContext'; // Asegúrate de importar el FilterProvider
+import ReservationCard from './componentes/ReservationCard';
 
 
 
 function App() {
-
   
+  const [activeComponent, setActiveComponent] = useState('');
+  
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case 'MyPets':
+      return (
+        <>
+          <MyPets />
+          <div className="flex justify-center mt-10">
+            <button
+              className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => openModal('PetModal')}
+            >
+              Agregar mascota
+            </button>
+            {modals.PetModal && (
+              <PetModal onClose={() => closeModal('PetModal')} onSubmit={handleSubmit} />
+            )}
+          </div>
+        </>
+      );
+      case 'MyReservations':
+        return <MyReservations reservations={reservationsData} />;
+      case 'ProfileCard':
+        return <ProfileCard />;
+        case 'MyServices':
+          return (
+            <>
+              <MyServices />
+              <div className="flex justify-center mt-10">
+                <button
+                  className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => openModal('CreateService')}
+                >
+                  Crear servicio
+                </button>
+                {modals.CreateService && <CreateService onClose={() => closeModal('CreateService')} />}
+              </div>
+            </>
+          );
+      case 'Reviews':
+        return (
+          <>
+            <ReviewBox name="Juan Pinzón" date="24/04/2024" image="images/elon.png" rating="3" comment="Increíble servicio"/>
+            <div className="container flex justify-center mx-auto px-4">
+              <button onClick={() => openModal('reviews')} className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Mostrar Reseñas
+              </button>
+              {modals.reviews && (
+                <Reviews 
+                  isOpen={modals.reviews}
+                  onClose={() => closeModal('reviews')}
+                  reviews={reviewsData}
+                />
+              )}
+            </div>
+            
+          </>
+        );
+      default:
+        return null; // Componente por defecto o página de inicio
+    }
+  };
+
   const handleSubmit = () => {
     // Lógica para refrescar los datos o realizar otras acciones necesarias
     console.log('New pet added');
@@ -116,13 +179,7 @@ function App() {
     }
   ];
   
-  const App = () => {
-    return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <MyReservations reservations={reservationsData} />
-      </div>
-    );
-  };
+
 
   return (
     <div className="App">
@@ -134,12 +191,13 @@ function App() {
       {/* ///////////////////Banner/////////////////// */}
       
       <HeroBanner/>
-      <ProfileBanner/>
       <FilterBar/>
       <ServiceList/>
+      <ProfileBanner setActiveComponent={setActiveComponent} />
+      {renderComponent()}
       <SitterBanner/>
-      <div className="flex justify-center m-10">
-      </div>
+
+      
       <div className="flex justify-center m-10">
             <button
                 className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -150,11 +208,8 @@ function App() {
             {modals.restablecerContrasena && <RestablecerContrasena onClose={() => closeModal('restablecerContrasena')} />}
         </div>
 
-      <ReviewBox name="Juan Pinzón" date="24/04/2024" image="images/elon.png" rating="3" comment="Increíble servicio"/>
       <div className="container mx-auto px-4">
-        <button onClick={() => openModal('reviews')} className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Mostrar Reseñas
-        </button>
+        
         {modals.reviews && (
           <Reviews 
             isOpen={modals.reviews}
@@ -164,7 +219,9 @@ function App() {
         )}
       </div>
       <div className="flex justify-center">
-            
+      <button onClick={() => openModal('reviews')} className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Mostrar Reseñas
+        </button>
             {modals.ModalLogin && <ModalLogin isOpen={modals.ModalLogin} onClose={() => closeModal('ModalLogin')} />}        </div>
 
       <div className="flex justify-center mt-10">
@@ -187,46 +244,29 @@ function App() {
             {modals.ModalContratar && <ModalContratar onClose={() => closeModal('ModalContratar')} />}
         </div>
 
-      <div className="flex justify-center items-center min-h-screen">
-        <MyReservations reservations={reservationsData} />
-      </div>
 
       <div className="flex justify-center items-center">
-        <MyPets pets={petsData} />
       </div>
 
       <div className="flex justify-center mt-10">
-      <button
-        className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={() => openModal('PetModal')}
-      >
-        Agregar mascota
-      </button>
+      
       {modals.PetModal && (
         <PetModal onClose={() => closeModal('PetModal')} onSubmit={handleSubmit} />
       )}
     </div>
 
       <div className="flex justify-center mt-10">
-            <button
-                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={() => openModal('CreateService')}
-            >
-                Crear servicio
-            </button>
+            
             {modals.CreateService && <CreateService onClose={() => closeModal('CreateService')} />}
         </div>
 
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-            <ProfileCard />
-      </div>
+
 
       <div className="flex justify-center mt-10">
                 
                 {modals.registerModal && <RegisterModal isOpen={modals.registerModal} onClose={() => closeModal('registerModal')} />}
             </div>
 
-      <MyServices/>
 
       
 
