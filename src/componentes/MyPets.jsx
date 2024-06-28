@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import PetCard from './PetCard';
+import { useAuth } from '../AuthContext'; // Verifica que la ruta sea correcta
 
 const MyPets = () => {
+  const { user } = useAuth(); // Obtener el usuario logueado desde el contexto
   const [pets, setPets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/pets')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        setPets(data.pets);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching pets:', error);
-        setError(error.toString());
-        setPets([]);
-        setIsLoading(false);
-      });
-  }, []);
+    if (user && user._id) {
+      fetch(`http://localhost:3000/pets?ownerId=${user._id}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          setPets(data.pets);
+          setIsLoading(false);
+        })
+        .catch(error => {
+          console.error('Error fetching pets:', error);
+          setError(error.toString());
+          setPets([]);
+          setIsLoading(false);
+        });
+    }
+  }, [user]);
 
   const handleDelete = (id) => {
     setPets(pets.filter(pet => pet._id !== id));

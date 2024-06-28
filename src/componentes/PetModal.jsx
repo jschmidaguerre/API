@@ -1,6 +1,9 @@
+// PetModal.js
 import React, { useState } from 'react';
+import { useAuth } from '../AuthContext'; // Verifica que la ruta es correcta
 
 const PetModal = ({ onClose, onSubmit }) => {
+  const { user } = useAuth(); // Acceso al contexto de autenticación para obtener el ID del usuario
   const [weight, setWeight] = useState('');
 
   const handleWeightChange = (e) => {
@@ -20,7 +23,8 @@ const PetModal = ({ onClose, onSubmit }) => {
       neutered: formData.get('neutered'),
       age: parseInt(formData.get('age'), 10),
       weight: parseFloat(formData.get('weight')),
-      type: formData.get('type') // Añadir el tipo de mascota
+      type: formData.get('type'),
+      ownerId: user._id // Añadir el ID del usuario
     };
 
     fetch('http://localhost:3000/pets', {
@@ -38,8 +42,8 @@ const PetModal = ({ onClose, onSubmit }) => {
     })
     .then(data => {
       console.log('Success:', data);
-      onSubmit();  // Call the onSubmit prop to refresh data or perform other actions
-      onClose();   // Close the modal after successful submission
+      onSubmit();  // Llamar al prop onSubmit para refrescar los datos u otras acciones
+      onClose();   // Cerrar el modal después de una sumisión exitosa
     })
     .catch(error => {
       console.error('Error:', error);

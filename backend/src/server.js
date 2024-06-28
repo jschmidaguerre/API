@@ -8,6 +8,7 @@ import login from './controllers/login.js';
 import register from './controllers/register.js';
 import id from './controllers/getUserById.js';
 
+
 //server
 const app = express();
 const port = 3000;
@@ -27,7 +28,60 @@ app.get('/user/:id', id);
 
 
 
+// Endpoint para crear mascotas con asociación a un usuario
+app.post('/pets', async (req, res) => {
+  const { name, gender, neutered, age, weight, ownerId } = req.body;
 
+  if (!mongoose.Types.ObjectId.isValid(ownerId)) {
+    return res.status(400).json({ message: 'Invalid owner ID format' });
+  }
+
+  try {
+    // Crear una nueva mascota
+    const pet = new Pet({
+      name,
+      gender,
+      neutered,
+      age,
+      weight,
+      owner: ownerId
+    });
+
+    // Guardar la mascota en la base de datos
+    const savedPet = await pet.save();
+
+    // Asociar la mascota al usuario
+    const user = await User.findById(ownerId);
+    user.pets.push(savedPet._id);
+    await user.save();
+
+    res.status(201).json(savedPet);
+  } catch (error) {
+    console.log('Error creating pet:', error);
+    res.status(400).json({ message: 'Error creating pet', error });
+  }
+});
+
+// Endpoint para obtener todas las mascotas de un usuario específico
+app.get('/pets', async (req, res) => {
+  const { ownerId } = req.query;
+
+  if (!ownerId) {
+    return res.status(400).json({ message: 'Owner ID is required' });
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(ownerId)) {
+    return res.status(400).json({ message: 'Invalid owner ID format' });
+  }
+
+  try {
+    const pets = await Pet.find({ owner: ownerId });
+    res.json({ pets });
+  } catch (error) {
+    console.log('Error fetching pets:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 // Endpoint para eliminar un servicio por ID
 app.delete('/services/:id', async (req, res) => {
@@ -136,16 +190,7 @@ app.get('/pets', async (req, res) => {
   }
 });
 
-// Endpoint para crear mascotas
-app.post('/pets', async (req, res) => {
-  try {
-    const newPet = new Pet(req.body);
-    const savedPet = await newPet.save();
-    res.status(201).json({ pet: savedPet });
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
+
 
 // Endpoint para eliminar mascotas
 app.delete('/pets/:id', async (req, res) => {
