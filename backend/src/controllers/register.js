@@ -1,36 +1,32 @@
-import userSchema from '../models/usuario.model.js';
+import userSchema from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 
-
 const register = async (req, res) => {
-    const {nombre, correo, contrasena} = req.body;
+    const { nombre, correo, contrasena } = req.body;
 
+    if (!nombre || !correo || !contrasena) {
+        return res.status(400).json({ mensaje: 'Falta el nombre, el correo o la contraseña, verifique por favor.' });
+    }
 
-    userSchema.findOne({ correo }).then((usuario)=>{
-        if(usuario){
-            return res.json({mensaje: 'Ya existe un usuario con ese correo.'})
-        } else if(!nombre || !correo || !contrasena){
-            return res.json({mensaje: 'Falta el nombre, el correo o la contraseña, verifique por favor.'})
-        } else {
-            bcrypt.hash(contrasena, 10, (error, contraseñaHasheada) => {
-                if(error) res.json({error});
-                else{
-                    const nuevoUsuario = new userSchema({
-                        nombre,
-                        correo,
-                        contrasena: contraseñaHasheada
-                    });
-                    
-                    nuevoUsuario.save()
-                    .then((usuario)=>{
-                        res.json({mensaje: 'El usuario se ha creado con exito.', usuario})
-                    })
-                    .catch((error)=>console.error(error))
-                }
-            })
+    try {
+        const existingUser = await userSchema.findOne({ correo });
+        if (existingUser) {
+            return res.status(400).json({ mensaje: 'Ya existe un usuario con ese correo.' });
         }
-    })
 
-}
+        const contraseñaHasheada = await bcrypt.hash(contrasena, 10);
+        const nuevoUsuario = new userSchema({
+            nombre,
+            correo,
+            contrasena: contraseñaHasheada
+        });
 
-export default register
+        const usuarioGuardado = await nuevoUsuario.save();
+        return res.status(201).json({ mensaje: 'El usuario se ha creado con exito.', usuario: usuarioGuardado });
+    } catch (error) {
+        console.error('Error registrando nuevo usuario:', error);
+        return res.status(500).json({ mensaje: 'Error registrando el usuario', error });
+    }
+};
+
+export default register;

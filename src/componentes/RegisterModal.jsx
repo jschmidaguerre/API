@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-const ModalLogin = ({ isOpen, onClose }) => {
-    const [loginData, setLoginData] = useState({
+const RegisterModal = ({ isOpen, onClose }) => {
+    const [userData, setUserData] = useState({
+        nombre: '',
         correo: '',
         contrasena: ''
     });
@@ -10,7 +11,7 @@ const ModalLogin = ({ isOpen, onClose }) => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setLoginData(prevState => ({
+        setUserData(prevState => ({
             ...prevState,
             [name]: value
         }));
@@ -22,12 +23,12 @@ const ModalLogin = ({ isOpen, onClose }) => {
         setError(null);
 
         try {
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch('http://localhost:3000/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(loginData)
+                body: JSON.stringify(userData)
             });
 
             if (!response.ok) {
@@ -35,11 +36,11 @@ const ModalLogin = ({ isOpen, onClose }) => {
             }
 
             const result = await response.json();
-            console.log('Login successful:', result);
-            onClose(); // Close the modal on successful login
+            console.log('Registration successful:', result);
+            onClose(); // Close the modal on successful registration
         } catch (error) {
-            console.error('Failed to login:', error);
-            setError('Failed to login: ' + error.message);
+            console.error('Failed to register:', error);
+            setError('Failed to register: ' + error.message);
         } finally {
             setIsLoading(false);
         }
@@ -52,20 +53,24 @@ const ModalLogin = ({ isOpen, onClose }) => {
     return (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
             <div className="bg-white p-8 rounded-lg w-full max-w-md" onClick={e => e.stopPropagation()}>
-                <h2 className="text-xl font-bold text-center">Login</h2>
+                <h2 className="text-xl font-bold text-center">Register New User</h2>
                 {error && <p className="text-red-500 text-sm">{error}</p>}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
+                        <label className="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" name="nombre" value={userData.nombre} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
+                    </div>
+                    <div>
                         <label className="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" name="correo" value={loginData.correo} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
+                        <input type="email" name="correo" value={userData.correo} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Password</label>
-                        <input type="password" name="contrasena" value={loginData.contrasena} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
+                        <input type="password" name="contrasena" value={userData.contrasena} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
                     </div>
                     <div className="flex justify-end">
                         <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" disabled={isLoading}>
-                            {isLoading ? 'Logging in...' : 'Login'}
+                            {isLoading ? 'Registering...' : 'Register'}
                         </button>
                     </div>
                 </form>
@@ -79,4 +84,4 @@ const ModalLogin = ({ isOpen, onClose }) => {
     );
 };
 
-export default ModalLogin;
+export default RegisterModal;

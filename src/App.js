@@ -21,6 +21,7 @@ import PetModal from './componentes/PetModal';
 import CreateService from './componentes/CreateService';
 import ProfileCard from './componentes/ProfileCard';
 import ServiceList from './componentes/ServiceList';
+import RegisterModal from './componentes/RegisterModal'
 
 import { FilterProvider } from './FilterContext'; // Asegúrate de importar el FilterProvider
 
@@ -168,8 +169,7 @@ function App() {
             >
                 Iniciar sesión
             </button>
-            {modals.ModalLogin && <ModalLogin onClose={() => closeModal('ModalLogin')} />}
-        </div>
+            {modals.ModalLogin && <ModalLogin isOpen={modals.ModalLogin} onClose={() => closeModal('ModalLogin')} />}        </div>
 
       <div className="flex justify-center mt-10">
             <button
@@ -223,7 +223,17 @@ function App() {
 
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
             <ProfileCard />
-        </div>
+      </div>
+
+      <div className="flex justify-center mt-10">
+                <button
+                    className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => openModal('registerModal')}
+                >
+                    Crear usuario
+                </button>
+                {modals.registerModal && <RegisterModal isOpen={modals.registerModal} onClose={() => closeModal('registerModal')} />}
+            </div>
 
       
 

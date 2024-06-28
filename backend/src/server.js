@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import usuario from './models/usuario.model.js';
+import user from './models/user.model.js';
 import Pet from './models/pet.model.js';  // Importación correcta del modelo Pet
 import Service from './models/service.model.js';  // Importación correcta del modelo Service
 import login from './controllers/login.js';
@@ -19,6 +19,15 @@ app.use(cors());
 
 
 app.use(express.json());  // Middleware para parsear JSON
+
+
+app.post('/register', register);
+app.post('/login', login);
+app.get('/user/:id', id);
+
+
+
+
 
 // Endpoint para eliminar un servicio por ID
 app.delete('/services/:id', async (req, res) => {
@@ -199,3 +208,12 @@ mongoose.connect(uri)
   .catch(error => {
     console.error('Connection fail', error);
   });
+
+  // After all route handlers
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).json({
+      message: err.message,
+      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+  });
+});
