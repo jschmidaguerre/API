@@ -8,28 +8,37 @@ const MyServices = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        // Inicializar la carga solo si el usuario está correctamente definido
         if (user && user._id) {
-            fetch(`http://localhost:3000/services?ownerId=${user._id}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    setServices(data.services);
-                    setIsLoading(false);
-                })
-                .catch(error => {
-                    console.error('Error fetching services:', error);
-                    setError(error.toString());
-                    setServices([]);
-                    setIsLoading(false);
-                });
+            fetchServices(user._id);
+        } else {
+            setIsLoading(false); // Si no hay usuario, no cargar servicios
         }
     }, [user]);
 
+    const fetchServices = (userId) => {
+        console.log("Fetching services for user ID:", userId); // Esto te ayudará a verificar que el ID es correcto
+        setIsLoading(true);
+        fetch(`http://localhost:3000/services?ownerId=${userId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setServices(data.services || []);
+                setIsLoading(false);
+            })
+            .catch(error => {
+                console.error('Error fetching services:', error);
+                setError(error.toString());
+                setIsLoading(false);
+            });
+    };
+
     const handleDelete = (id) => {
+        setIsLoading(true); // Mostrar estado de carga durante el proceso de eliminación
         fetch(`http://localhost:3000/services/${id}`, {
             method: 'DELETE',
             headers: {
@@ -45,7 +54,8 @@ const MyServices = () => {
         .catch(error => {
             console.error('Error deleting service:', error);
             setError(error.toString());
-        });
+        })
+        .finally(() => setIsLoading(false)); // Restablecer el estado de carga
     };
 
     if (isLoading) {

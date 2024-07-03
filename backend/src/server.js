@@ -148,23 +148,30 @@ app.delete('/services/:id', async (req, res) => {
 
 
 app.get('/services', async (req, res) => {
-  try {
-    // Construyendo un objeto de consulta basado en parámetros recibidos
-    const query = {};
-    if (req.query.localidad) query.localidad = req.query.localidad;
-    if (req.query.serviceType) query.serviceType = req.query.serviceType;
-    if (req.query.category) query.category = req.query.category;
-    if (req.query.fromDate) query.fromDate = { $gte: new Date(req.query.fromDate) };
-    if (req.query.toDate) query.toDate = { $lte: new Date(req.query.toDate) };
+  const { ownerId, localidad, serviceType, category, fromDate, toDate } = req.query;
+  const query = {};
 
-    const services = await Service.find(query);
-    res.json({ services });
+  if (ownerId) {
+      if (!mongoose.Types.ObjectId.isValid(ownerId)) {
+          return res.status(400).json({ message: 'Invalid owner ID format' });
+      }
+      query.owner = ownerId;
+  }
+
+  if (localidad) query.localidad = localidad;
+  if (serviceType) query.serviceType = serviceType;
+  if (category) query.category = category;
+  if (fromDate) query.fromDate = { $gte: new Date(fromDate) };
+  if (toDate) query.toDate = { $lte: new Date(toDate) };
+
+  try {
+      const services = await Service.find(query);
+      res.json({ services });
   } catch (error) {
-    console.log('Error fetching services:', error);
-    res.status(500).json({ message: 'Internal server error' });
+      console.log('Error fetching services:', error);
+      res.status(500).json({ message: 'Internal server error' });
   }
 });
-
 // Endpoint para crear servicios
 app.post('/services', async (req, res) => {
   try {
@@ -180,6 +187,7 @@ app.post('/services', async (req, res) => {
 app.get('/user/:id', id)
 app.post('/register', register)
 app.post('/login', login)
+
 
 
 // Endpoint para crear usuarios
