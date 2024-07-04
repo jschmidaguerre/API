@@ -1,8 +1,19 @@
-import React from 'react';
-import Button from './Button'; // Asegúrate de que el componente Button está correctamente importado.
+import React, { useState } from 'react';
+import ModalContratar from './ModalContratar';
+import { useAuth } from '../AuthContext'; // Asegúrate de que esta ruta es correcta en tu proyecto
 
-const Card = ({ nombre, categoria, duracion, costo, descripcion, estrellas, imagen,localidad }) => {
-    // Función para generar las estrellas de calificación
+const Card = ({ nombre, categoria, duracion, costo, descripcion, estrellas, imagen, localidad, serviceId }) => {
+    const { user } = useAuth();
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const toggleModal = () => {
+        if (!user) {
+            alert("Por favor, inicia sesión para contratar servicios.");
+            return;
+        }
+        setModalOpen(!isModalOpen);
+    };
+
     const renderStars = () => {
         let stars = [];
         for (let i = 0; i < estrellas; i++) {
@@ -19,18 +30,21 @@ const Card = ({ nombre, categoria, duracion, costo, descripcion, estrellas, imag
             <div className="text-center my-4">
                 {renderStars()}
                 <h2 className="text-md font-semibold mb-2">{nombre}</h2>
-                <div className="mt-5 mb-5">
-                    <Button text="Contratar" />
-                </div>
+                <button
+                    className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={toggleModal}
+                >
+                    Contratar
+                </button>
             </div>
             <ul className="text-xs my-2">
                 <li><strong>Categoría:</strong> {categoria}</li>
                 <li><strong>Duración:</strong> {duracion}</li>
                 <li><strong>Costo:</strong> ${costo}</li>
                 <li><strong>Localidad:</strong> {localidad}</li>
-
                 <li className="truncate"><strong>Descripción:</strong> {descripcion}</li>
             </ul>
+            {isModalOpen && <ModalContratar onClose={toggleModal} serviceId={serviceId} />}
         </div>
     );
 };

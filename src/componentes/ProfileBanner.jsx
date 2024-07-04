@@ -16,6 +16,10 @@ const ProfileBanner = ({ setActiveComponent }) => {
         <div className="text-sm mt-2">Mis reservas</div>
       </div>
       <div className="text-center">
+        <button className="text-3xl cursor-pointer" onClick={() => setActiveComponent('MyRequests')}>📜</button>
+        <div className="text-sm mt-2">Mis solicitudes</div>
+      </div>
+      <div className="text-center">
         <button className="text-3xl cursor-pointer" onClick={() => setActiveComponent('Reviews')}>🌟</button>
         <div className="text-sm mt-2">Mis reseñas</div>
       </div>

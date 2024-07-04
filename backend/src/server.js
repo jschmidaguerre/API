@@ -7,6 +7,8 @@ import Service from './models/service.model.js';  // Importación correcta del m
 import login from './controllers/login.js';
 import register from './controllers/register.js';
 import id from './controllers/getUserById.js';
+import Contract from './models/contract.model.js';  // Asegúrate de que la ruta sea correcta
+
 
 
 //server
@@ -27,6 +29,34 @@ app.post('/login', login);
 app.get('/user/:id', id);
 
 
+app.post('/contracts', async (req, res) => {
+  try {
+    const { userID, serviceID, contactPhone, contactEmail, contactTime, message } = req.body;
+    
+    if (!mongoose.Types.ObjectId.isValid(userID) || !mongoose.Types.ObjectId.isValid(serviceID)) {
+      return res.status(400).json({ message: 'Invalid user or service ID format' });
+    }
+
+    const newContract = new Contract({
+      userID,
+      serviceID,
+      contactPhone,
+      contactEmail,
+      contactTime,
+      message
+    });
+
+    const savedContract = await newContract.save();
+    res.status(201).json(savedContract);
+  } catch (error) {
+    console.log('Error creating contract:', error);
+    res.status(500).json({ message: 'Internal server error', error });
+  }
+});
+
+newContract.save()
+  .then(doc => console.log('Contratación guardada:', doc))
+  .catch(err => console.error('Error al guardar la contratación:', err));
 
 // Endpoint para crear mascotas con asociación a un usuario
 app.post('/pets', async (req, res) => {
