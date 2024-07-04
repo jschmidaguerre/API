@@ -28,64 +28,30 @@ app.post('/register', register);
 app.post('/login', login);
 app.get('/user/:id', id);
 
+// Endpoint para obtener contratos por userID
+app.get('/contracts/user/:userId', async (req, res) => {
+  const { userId } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({ message: 'Invalid user ID format' });
+  }
 
-app.post('/contracts', async (req, res) => {
   try {
-    const { userID, serviceID, contactPhone, contactEmail, contactTime, message } = req.body;
-    
-    if (!mongoose.Types.ObjectId.isValid(userID) || !mongoose.Types.ObjectId.isValid(serviceID)) {
-      return res.status(400).json({ message: 'Invalid user or service ID format' });
-    }
-
-    const newContract = new Contract({
-      userID,
-      serviceID,
-      contactPhone,
-      contactEmail,
-      contactTime,
-      message
-    });
-
-    const savedContract = await newContract.save();
-    res.status(201).json(savedContract);
+    const contracts = await Contract.find({ userId }); // Asegúrate de usar 'userId' que es el campo correcto
+    res.status(200).json(contracts);
   } catch (error) {
-    console.log('Error creating contract:', error);
+    console.log('Error fetching contracts:', error);
     res.status(500).json({ message: 'Internal server error', error });
   }
 });
 
-newContract.save()
-  .then(doc => console.log('Contratación guardada:', doc))
-  .catch(err => console.error('Error al guardar la contratación:', err));
-
-// Endpoint para crear mascotas con asociación a un usuario
-app.post('/pets', async (req, res) => {
-  const { name, gender, neutered, age, weight, ownerId } = req.body;
-
-  if (!mongoose.Types.ObjectId.isValid(ownerId)) {
-    return res.status(400).json({ message: 'Invalid owner ID format' });
-  }
-
+app.post('/contracts', async (req, res) => {
   try {
-    const pet = new Pet({
-      name,
-      gender,
-      neutered,
-      age,
-      weight,
-      owner: ownerId
-    });
-
-    const savedPet = await pet.save();
-
-    const user = await User.findById(ownerId);
-    user.pets.push(savedPet._id);
-    await user.save();
-
-    res.status(201).json(savedPet);
+    const newContract = new Contract(req.body);
+    await newContract.save();
+    res.status(201).json(newContract);
   } catch (error) {
-    console.log('Error creating pet:', error);
-    res.status(400).json({ message: 'Error creating pet', error });
+    console.error('Error creating contract:', error);
+    res.status(500).json({ message: 'Error creating contract', error: error.message });
   }
 });
 

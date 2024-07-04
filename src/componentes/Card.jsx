@@ -11,6 +11,11 @@ const Card = ({ nombre, categoria, duracion, costo, descripcion, estrellas, imag
             alert("Por favor, inicia sesión para contratar servicios.");
             return;
         }
+        if (!serviceId) {
+            console.error("Service ID is missing");
+            alert("Ocurrió un error al procesar el servicio. Intente de nuevo más tarde.");
+            return;
+        }
         setModalOpen(!isModalOpen);
     };
 
@@ -25,7 +30,7 @@ const Card = ({ nombre, categoria, duracion, costo, descripcion, estrellas, imag
     return (
         <div className="m-10 bg-gray-100 rounded-xl p-4 shadow-md w-64">
             <div className="flex justify-center">
-                <img src={imagen} alt={nombre} className="w-24 h-24 object-cover rounded-full" />
+                <img src={imagen} alt={`Imagen de ${nombre}`} className="w-24 h-24 object-cover rounded-full" />
             </div>
             <div className="text-center my-4">
                 {renderStars()}

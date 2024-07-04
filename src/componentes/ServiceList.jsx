@@ -45,16 +45,17 @@ const ServiceList = () => {
         <div className="flex flex-wrap justify-center">
             {services.map(service => (
                 <Card
-                    key={service._id}
-                    nombre={service.name}
-                    categoria={service.category}
-                    duracion={`${new Date(service.fromDate).toLocaleDateString()} - ${new Date(service.toDate).toLocaleDateString()}`}
-                    costo={service.cost}
-                    descripcion={service.description}
-                    estrellas={service.stars || 0}
-                    imagen={service.image || 'default-image-url'}
-                    localidad={service.localidad}
-                />
+                key={service._id}
+                nombre={service.name}
+                categoria={service.category}
+                duracion={`${new Date(service.fromDate).toLocaleDateString()} - ${new Date(service.toDate).toLocaleDateString()}`}
+                costo={service.cost}
+                descripcion={service.description}
+                estrellas={service.stars || 0}
+                imagen={service.image || 'default-image-url'}
+                localidad={service.localidad}
+                serviceId={service._id} // Propagando serviceId a cada Card
+            />
             ))}
         </div>
     );

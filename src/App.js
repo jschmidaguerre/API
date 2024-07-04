@@ -26,6 +26,7 @@ import MyServices from './componentes/MyServices';
 
 import { FilterProvider } from './FilterContext'; // Asegúrate de importar el FilterProvider
 import ReservationCard from './componentes/ReservationCard';
+import ContractsList from './componentes/ContractsList';
 
 
 
@@ -87,7 +88,12 @@ function App() {
                 />
               )}
             </div>
-            
+          </>
+        );
+        case 'MyRequests':
+        return (
+          <>
+            <ContractsList/>
           </>
         );
       default:
@@ -264,6 +270,8 @@ function App() {
                 
                 {modals.registerModal && <RegisterModal isOpen={modals.registerModal} onClose={() => closeModal('registerModal')} />}
             </div>
+
+      <ContractsList/>
 
 
       
