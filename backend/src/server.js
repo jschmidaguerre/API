@@ -28,6 +28,29 @@ app.post('/register', register);
 app.post('/login', login);
 app.get('/user/:id', id);
 
+
+
+// Endpoint para obtener contratos por providerId
+app.get('/api/contracts/provider/:providerId', async (req, res) => {
+  const { providerId } = req.params;
+
+  try {
+      // Obtener los servicios del proveedor
+      const services = await Service.find({ owner: providerId }).select('_id');
+      const serviceIds = services.map(service => service._id);
+
+      // Obtener los contratos para esos servicios
+      const contracts = await Contract.find({ serviceId: { $in: serviceIds } }).populate('userId', 'nombre correo').populate('serviceId', 'name');
+
+      res.status(200).json(contracts);
+  } catch (error) {
+      console.error('Error fetching contracts for provider:', error);
+      res.status(500).json({ message: 'Error fetching contracts for provider', error });
+  }
+});
+
+
+
 // Endpoint para obtener contratos por userID
 app.get('/contracts/user/:userId', async (req, res) => {
   const { userId } = req.params;
