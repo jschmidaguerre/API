@@ -59,6 +59,40 @@ app.put('/api/contracts/:contractId', async (req, res) => {
   }
 });
 
+
+// Endpoint para crear mascotas con asociación a un usuario
+app.post('/pets', async (req, res) => {
+  const { name, gender, neutered, age, weight, ownerId } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(ownerId)) {
+    return res.status(400).json({ message: 'Invalid owner ID format' });
+  }
+
+  try {
+    // Crear una nueva mascota
+    const pet = new Pet({
+      name,
+      gender,
+      neutered,
+      age,
+      weight,
+      owner: ownerId
+    });
+
+    // Guardar la mascota en la base de datos
+    const savedPet = await pet.save();
+
+    // Asociar la mascota al usuario
+    const user = await User.findById(ownerId);
+    user.pets.push(savedPet._id);
+    await user.save();
+
+    res.status(201).json(savedPet);
+  } catch (error) {
+    console.log('Error creating pet:', error);
+    res.status(400).json({ message: 'Error creating pet', error });
+  }
+});
 // Endpoint para obtener contratos por providerId
 app.get('/api/contracts/provider/:providerId', async (req, res) => {
   const { providerId } = req.params;

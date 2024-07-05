@@ -40,7 +40,6 @@ const ReservationCard = ({ id, photo, name, serviceType, date, cost, message, us
   return (
     <div className={cardClassName}>
       <div className="flex items-center space-x-4">
-        <img src={photo} alt={name} className="w-16 h-16 rounded-full object-cover" />
         <div>
           <h2 className="text-xl font-bold">{name}</h2>
           <p className="text-gray-500">{serviceType}</p>
