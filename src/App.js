@@ -205,12 +205,7 @@ function App() {
 
       
       <div className="flex justify-center m-10">
-            <button
-                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={() => openModal('restablecerContrasena')}
-            >
-                Restablecer Contraseña
-            </button>
+            
             {modals.restablecerContrasena && <RestablecerContrasena onClose={() => closeModal('restablecerContrasena')} />}
         </div>
 
@@ -229,22 +224,12 @@ function App() {
             {modals.ModalLogin && <ModalLogin isOpen={modals.ModalLogin} onClose={() => closeModal('ModalLogin')} />}        </div>
 
       <div className="flex justify-center mt-10">
-            <button
-                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={() => openModal('SelectService')}
-            >
-                Seleccionar servicio
-            </button>
+            
             {modals.SelectService && <SelectService onClose={() => closeModal('SelectService')} />}
         </div>
 
       <div className="flex justify-center mt-10">
-            <button
-                className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={() => openModal('ModalContratar')}
-            >
-                Contratar
-            </button>
+            
             {modals.ModalContratar && <ModalContratar onClose={() => closeModal('ModalContratar')} />}
         </div>
 
@@ -271,7 +256,6 @@ function App() {
                 {modals.registerModal && <RegisterModal isOpen={modals.registerModal} onClose={() => closeModal('registerModal')} />}
             </div>
 
-      <ContractsList/>
 
 
       
