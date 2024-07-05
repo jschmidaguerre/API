@@ -48,7 +48,7 @@ const ContractsList = () => {
       {contracts.map((contract) => (
         <div key={contract._id} className="w-2/3 border border-blue-100 p-4 mb-2 rounded shadow-sm">
           <p><strong>Estado:</strong> {contract.status}</p>
-          <p><strong>Email de Contacto:</strong> {contract.contactEmail}</p>
+          <p><strong>Mensaje:</strong> {contract.message}</p>
           <p><strong>Teléfono de Contacto:</strong> {contract.contactPhone}</p>
           <p><strong>Mensaje:</strong> {contract.message}</p>
         </div>

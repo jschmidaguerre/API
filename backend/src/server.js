@@ -29,6 +29,35 @@ app.post('/login', login);
 app.get('/user/:id', id);
 
 
+app.put('/api/contracts/:contractId', async (req, res) => {
+  const { contractId } = req.params;
+  const { status } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(contractId)) {
+    return res.status(400).json({ message: 'Invalid contract ID format' });
+  }
+
+  if (!status || !['Solicitada', 'Aceptada', 'Finalizada', 'Cancelada'].includes(status)) {
+    return res.status(400).json({ message: 'Invalid or missing status' });
+  }
+
+  try {
+    const updatedContract = await Contract.findByIdAndUpdate(
+      contractId,
+      { $set: { status } },
+      { new: true }
+    );
+
+    if (!updatedContract) {
+      return res.status(404).json({ message: 'Contract not found' });
+    }
+
+    res.status(200).json(updatedContract);
+  } catch (error) {
+    console.error('Error updating contract status:', error);
+    res.status(500).json({ message: 'Error updating contract status', error });
+  }
+});
 
 // Endpoint para obtener contratos por providerId
 app.get('/api/contracts/provider/:providerId', async (req, res) => {

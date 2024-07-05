@@ -51,13 +51,16 @@ const MyReservations = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {requests.map((request, index) => (
           <ReservationCard
-            key={index}
-            photo={request.userId.photo || 'default_photo.jpg'} // Asegúrate de que el campo correcto está siendo usado
-            name={request.userId.nombre} // Asumiendo que el nombre del cliente está en 'userId.nombre'
-            serviceType={request.serviceId.name}
-            date={request.date}
-            cost={request.cost}
-            status={request.status}
+          key={index}
+          id={request._id}  // Asegúrate de que el ID de la solicitud está siendo pasado
+          userId={user._id} // Agregar esta línea para pasar el ID del usuario
+          photo={request.userId.photo || 'default_photo.jpg'}
+          name={request.userId.nombre}
+          serviceType={request.serviceId.name}
+          date={request.date}
+          cost={request.cost}
+          status={request.status}
+          message={request.message}
           />
         ))}
       </div>
